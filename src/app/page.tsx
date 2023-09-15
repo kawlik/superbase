@@ -1,6 +1,19 @@
+"use client";
+
+// @node
+import { redirect } from "next/navigation";
+
+// @root
+import { useAuthContext } from "@/contexts/auth";
+
 export default function () {
-	// component logic
+	// component hooks
+	const authCtx = useAuthContext();
 
 	// component layout
-	return <h2>Hello Superbase!</h2>;
+	if (!!authCtx) {
+		return redirect("/home/ledgers");
+	} else {
+		return redirect("/auth/sign-in");
+	}
 }

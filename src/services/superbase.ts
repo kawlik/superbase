@@ -2,7 +2,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 // @root
-import { Database } from "@/types/superbase/db";
+import { Database } from "@/types/superbase/app";
 
 export const superbaseClient = createClient<Database>(
 	"https://dhwgwnbyycokaibeijbq.supabase.co",
