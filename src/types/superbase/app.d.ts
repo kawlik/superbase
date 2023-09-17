@@ -68,6 +68,7 @@ export interface Database {
 				Row: {
 					expenseCost: number;
 					expenseName: string;
+					expenseText: string | null;
 					expenseType: string | null;
 					id: string;
 					userID: string;
@@ -75,6 +76,7 @@ export interface Database {
 				Insert: {
 					expenseCost: number;
 					expenseName: string;
+					expenseText?: string | null;
 					expenseType?: string | null;
 					id: string;
 					userID: string;
@@ -82,6 +84,7 @@ export interface Database {
 				Update: {
 					expenseCost?: number;
 					expenseName?: string;
+					expenseText?: string | null;
 					expenseType?: string | null;
 					id?: string;
 					userID?: string;
@@ -99,43 +102,61 @@ export interface Database {
 				Row: {
 					id: string;
 					messageText: string;
-					messageType: string;
+					messageType: string | null;
 				};
 				Insert: {
 					id?: string;
 					messageText: string;
-					messageType: string;
+					messageType?: string | null;
 				};
 				Update: {
 					id?: string;
 					messageText?: string;
-					messageType?: string;
+					messageType?: string | null;
 				};
 				Relationships: [];
 			};
 			Posts: {
 				Row: {
+					billID: string;
 					id: string;
+					postExpenseID: string | null;
 					postMessageID: string | null;
 					timestampCreatedAt: string;
 					timestampUpdatedAt: string;
 					userID: string;
 				};
 				Insert: {
+					billID: string;
 					id: string;
+					postExpenseID?: string | null;
 					postMessageID?: string | null;
 					timestampCreatedAt?: string;
 					timestampUpdatedAt?: string;
 					userID: string;
 				};
 				Update: {
+					billID?: string;
 					id?: string;
+					postExpenseID?: string | null;
 					postMessageID?: string | null;
 					timestampCreatedAt?: string;
 					timestampUpdatedAt?: string;
 					userID?: string;
 				};
 				Relationships: [
+					{
+						foreignKeyName: "Posts_billID_fkey";
+						columns: ["billID"];
+						referencedRelation: "Bills";
+						referencedColumns: ["id"];
+					},
+					{
+						foreignKeyName: "Posts_postExpenseID_fkey";
+						columns: ["postExpenseID"];
+						referencedRelation: "PostExpenses";
+						referencedColumns: ["id"];
+					},
 					{
 						foreignKeyName: "Posts_postMessageID_fkey";
 						columns: ["postMessageID"];

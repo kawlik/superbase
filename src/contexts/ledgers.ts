@@ -1,7 +1,7 @@
 // @node
 import { create } from "zustand";
 
-export const useLedgersCtx = create<{
+export const useLedgersContext = create<{
 	list: unknown[];
 }>(() => ({
 	list: [],
