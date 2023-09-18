@@ -4,5 +4,9 @@ export default function () {
 	// component logic
 
 	// component layout
-	return <h2>Sign Up</h2>;
+	return (
+		<div className="hero flex-1">
+			<h2>Sign Up</h2>
+		</div>
+	);
 }

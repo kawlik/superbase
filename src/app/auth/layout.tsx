@@ -11,12 +11,8 @@ export default function (props: React.PropsWithChildren) {
 	const authCtx = useAuthContext();
 
 	// component logic
-	if (!authCtx) return redirect("/home/ledgers");
+	if (!!authCtx.user) return redirect("/home/ledgers");
 
 	// component layout
-	return (
-		<main className="flex h-full w-full flex-col flex-nowrap items-stretch justify-between">
-			{props.children}
-		</main>
-	);
+	return <main className="flex h-full w-full place-content-center">{props.children}</main>;
 }
