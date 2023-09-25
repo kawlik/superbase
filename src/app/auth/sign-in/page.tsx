@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useAuthContext } from "@/contexts/auth";
 
 // @view
+import { AlertFailure } from "./page.alert-failure";
 import { AlertSuccess } from "./page.alert-success";
 import { Banner } from "./page.banner";
 import { Login } from "./page.login";
@@ -23,14 +24,19 @@ export default function () {
 	const dismissSuccess = () => setPromptSuccess(false);
 
 	const signInWithEmail = async (email: string) => {
-		await authCtx.auth.signInWithOtp({ email }).then((res) => {
-			console.log(res);
+		await authCtx.auth.signInWithOtp({ email }).then(({ error }) => {
+			if (error === null) {
+				setPromptSuccess(true);
+			} else {
+				setPromptFailure(true);
+			}
 		});
 	};
 
 	// component layout
 	return (
 		<div className="hero flex-1 overflow-y-auto">
+			<AlertFailure dismiss={dismissFailure} isVisible={promptFailure} />
 			<AlertSuccess dismiss={dismissSuccess} isVisible={promptSuccess} />
 			<div className="hero-content flex-col gap-6">
 				<Banner />
