@@ -10,10 +10,9 @@ export default function () {
 	// component hooks
 	const authCtx = useAuthContext();
 
+	// component logic
+	authCtx.auth.signOut();
+
 	// component layout
-	if (!!authCtx.user) {
-		return redirect("/home/ledgers");
-	} else {
-		return redirect("/auth/sign-in");
-	}
+	return redirect("/auth/sign-in");
 }

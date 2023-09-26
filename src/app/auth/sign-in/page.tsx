@@ -1,5 +1,8 @@
 "use client";
 
+// @next
+import { redirect } from "next/navigation";
+
 // @node
 import { useState } from "react";
 
@@ -32,6 +35,9 @@ export default function () {
 			}
 		});
 	};
+
+	// auto redirect
+	if (!!authCtx.user) return redirect("/home/ledgers");
 
 	// component layout
 	return (
