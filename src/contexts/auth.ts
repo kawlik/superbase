@@ -2,18 +2,18 @@
 import { create } from "zustand";
 
 // @root
-import { superbaseClient } from "@/services/superbase";
-import { SuperbaseAuth } from "@/types/superbase/auth";
-import { SuperbaseUser } from "@/types/superbase/user";
+import { supabaseClient } from "@/services/supabase";
+import { SupabaseAuth } from "@/types/supabase/auth";
+import { SupabaseUser } from "@/types/supabase/user";
 
 export const useAuthContext = create<{
-	auth: SuperbaseAuth;
-	user: SuperbaseUser | undefined;
+	auth: SupabaseAuth;
+	user: SupabaseUser | undefined;
 }>(() => ({
-	auth: superbaseClient.auth,
+	auth: supabaseClient.auth,
 	user: undefined,
 }));
 
-superbaseClient.auth.onAuthStateChange((_, session) => {
+supabaseClient.auth.onAuthStateChange((_, session) => {
 	useAuthContext.setState({ user: session?.user });
 });
