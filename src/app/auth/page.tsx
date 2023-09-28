@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 
 // @root
 import { getSupabaseServer } from "@/tools/supabase";
+
+// @view
 import AuthClient from "../page.auth-client";
 
 export default async function () {

@@ -8,9 +8,9 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 
 export function getSupabaseClient() {
-	return createClientComponentClient();
+	return createClientComponentClient<Supabase>();
 }
 
 export function getSupabaseServer() {
-	return createServerComponentClient({ cookies });
+	return createServerComponentClient<Supabase>({ cookies });
 }

@@ -1,15 +1,12 @@
-// @next
-import { cookies } from "next/headers";
-
-// @node
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+// @root
+import { getSupabaseServer } from "@/tools/supabase";
 
 // @view
 import AuthClient from "./page.auth-client";
 
 export default async function AuthServer() {
 	// component hooks
-	const supabase = createServerComponentClient({ cookies });
+	const supabase = getSupabaseServer();
 
 	// component logic
 	const session = await supabase.auth.getSession();

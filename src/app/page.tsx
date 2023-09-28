@@ -1,23 +1,22 @@
 // @next
-import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-// @node
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+// @root
+import { getSupabaseServer } from "@/tools/supabase";
 
 // @view
-import { redirect } from "next/navigation";
 import AuthServer from "./page.auth-server";
 
 export default async function () {
 	// component hooks
-	const supabase = await createServerComponentClient({ cookies });
+	const supabase = await getSupabaseServer();
 
 	// component logic
 	if (!(await supabase.auth.getSession()).data.session) {
 		return redirect("/auth");
 	}
 
-	const { data: tweets } = await supabase.from("tweets").select();
+	const { data: tweets } = await supabase.from("tweets").select("*, users(*)");
 
 	// component layout
 	return (

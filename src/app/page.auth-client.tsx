@@ -9,7 +9,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 export default function AuthClient(props: { hasSession: boolean }) {
 	// component hooks
 	const router = useRouter();
-	const supabase = createClientComponentClient();
+	const supabase = createClientComponentClient<Supabase>();
 
 	// component logic
 	const handleSignIn = async () => {
